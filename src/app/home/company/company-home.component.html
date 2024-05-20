@@ -1,0 +1,359 @@
+<div class="company-layout">
+  <div class="header">
+    <div class="header-name">
+      <h2 class="m-0">CREATE<span>WORK</span></h2>
+    </div>
+    <div class="header-btns">
+      <button
+        (click)="btnManage = false"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
+        Create job
+      </button>
+      <div class="px-2">
+        <div class="dropdown">
+          <button class="profile">
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <div class="dropdown-content" *ngIf="companyData">
+            <div class="d-flex justify-content-between border-bottom pb-2">
+              <div class="profile-logo">
+                <p>
+                  {{
+                    companyData.firstName?.charAt(0) +
+                      "" +
+                      companyData.lastName?.charAt(0)
+                  }}
+                </p>
+              </div>
+              <div>
+                <h5>
+                  {{ companyData.firstName + " " + companyData.lastName }}
+                </h5>
+                <span>{{ companyData.email }}</span>
+              </div>
+            </div>
+            <div class="text-end pt-2 pe-2">
+              <span class="logout-btn" (click)="logout()">Logout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pending-job-part">
+    <div *ngIf="!allJobData.length" class="no-data-found">
+      <img
+        src="../../../assets/not data found.png"
+        class="h-100 w-100 object-fit-contain"
+      />
+    </div>
+    <div class="row" *ngIf="allJobData.length">
+      <div
+        class="col-xxl-3 col-lg-4 col-sm-6 col-12 pb-4"
+        *ngFor="let data of allJobData"
+      >
+        <div class="display-job-design">
+          <div class="img-name">
+            <div class="job-img">
+              <img
+                *ngIf="data.logoUrl"
+                [src]="data.logoUrl"
+                class="object-fit-contain"
+                width="80px"
+                height="80px"
+              />
+              <img
+                *ngIf="!data.logoUrl"
+                src="../../../assets/No image vector.png"
+                class="object-fit-contain"
+                width="80px"
+                height="80px"
+              />
+            </div>
+            <div class="job-company-name">
+              <div class="">
+                <h5>{{ data.jobName }}</h5>
+              </div>
+              <span>{{ data.companyName }}</span>
+            </div>
+          </div>
+          <div class="tag-design">
+            <div class="">
+              <span>{{ data.jobType }}</span>
+            </div>
+            <div class="px-2">
+              <span>{{ data.jobStyle }}</span>
+            </div>
+            <div class="">
+              <span>{{ data.experienceLevel }}</span>
+            </div>
+          </div>
+          <div class="job-description">
+            <p>{{ data.jobDescription }}</p>
+          </div>
+          <div class="date-and-apply">
+            <div class="d-flex">
+              <span *ngIf="(data.date | totalDays) === 0">Today</span>
+              <span *ngIf="(data.date | totalDays) === 1"
+                >{{ data.date | totalDays }} Day ago</span
+              >
+              <span *ngIf="(data.date | totalDays) > 1"
+                >{{ data.date | totalDays }} Days ago</span
+              >
+            </div>
+            <div class="bookmark">
+              <div
+                [ngClass]="{
+                  pending: data.status === 'Pending',
+                  approve: data.status === 'Approve',
+                  reject: data.status === 'Reject'
+                }"
+              >
+                {{ data.status }}
+              </div>
+              <button
+                class="btn accept-job-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                (click)="editJob(data.id); btnManage = true"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="btn reject-job-btn" (click)="deleteJob(data.id)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create job Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-3" id="staticBackdropLabel">Create Job</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="resetModal()"
+          #closeModal
+        ></button>
+      </div>
+      <div class="modal-body pb-0">
+        <form [formGroup]="createJobForm" (ngSubmit)="submitForm()">
+          <div class="form-design">
+            <div class="add-logo">
+              <input
+                class="d-none"
+                (change)="addLogo($event)"
+                #logoAddButton
+                type="file"
+                accept="image/*"
+              />
+              <div class="add-logo-btn">
+                <button type="button" (click)="logoAddButton.click()">
+                  Add Logo
+                </button>
+              </div>
+              <div class="img-area" *ngIf="imgUrl">
+                <img
+                  [src]="imgUrl"
+                  class="object-fit-contain"
+                  width="70px"
+                  height="70px"
+                />
+                <div>
+                  <button (click)="imgUrl = null">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="companyName"
+                placeholder="Company Name"
+              />
+              <div class="error">
+                <div
+                  class="ps-2"
+                  *ngIf="
+                    createJobForm.controls['companyName'].invalid &&
+                    createJobForm.controls['companyName'].touched
+                  "
+                >
+                  Company name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="jobName"
+                placeholder="Job Name"
+              />
+              <div class="error">
+                <div
+                  class="ps-2"
+                  *ngIf="
+                    createJobForm.controls['jobName'].invalid &&
+                    createJobForm.controls['jobName'].touched
+                  "
+                >
+                  Job name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <div class="d-flex align-items-center border-bottom border-dark">
+                <select
+                  name="experience"
+                  formControlName="experienceLevel"
+                  class="form-control border-0"
+                >
+                  <option value="" hidden>Select Experience Level</option>
+                  <option value="internship">Internship</option>
+                  <option value="Entry Level">Entry Level</option>
+                  <option value="Associate">Associate</option>
+                  <option value="Mid-Senior Level">Mid-Senior Level</option>
+                  <option value="Director">Director</option>
+                </select>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+              <div class="error">
+                <div
+                  class="ps-2"
+                  *ngIf="
+                    createJobForm.controls['experienceLevel'].invalid &&
+                    createJobForm.controls['experienceLevel'].touched
+                  "
+                >
+                  Please select a experience level
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <div class="d-flex align-items-center border-bottom border-dark">
+                <select
+                  name="jobType"
+                  class="form-control border-0"
+                  formControlName="jobType"
+                >
+                  <option value="" hidden>Select Job Type</option>
+                  <option value="Full-time">Full-time</option>
+                  <option value="Part-time">Part-time</option>
+                  <option value="Internship">Internship</option>
+                  <option value="Contract">Contract</option>
+                </select>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+              <div class="error">
+                <div
+                  class="ps-2"
+                  *ngIf="
+                    createJobForm.controls['jobType'].invalid &&
+                    createJobForm.controls['jobType'].touched
+                  "
+                >
+                  Please select a job type
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <div class="d-flex align-items-center border-bottom border-dark">
+                <select
+                  name="jobStyle"
+                  class="form-control border-0"
+                  formControlName="jobStyle"
+                >
+                  <option value="" hidden>Select Job Style</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Onsite">Onsite</option>
+                </select>
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+              <div class="error">
+                <div
+                  class="ps-2"
+                  *ngIf="
+                    createJobForm.controls['jobStyle'].invalid &&
+                    createJobForm.controls['jobStyle'].touched
+                  "
+                >
+                  Please select a job style
+                </div>
+              </div>
+            </div>
+
+            <div class="input-field">
+              <textarea
+                type=""
+                class="form-control"
+                formControlName="jobDescription"
+                placeholder="Job Description"
+              ></textarea>
+              <div class="error">
+                <div
+                  class="ps-2"
+                  *ngIf="
+                    createJobForm.controls['jobDescription'].invalid &&
+                    createJobForm.controls['jobDescription'].touched
+                  "
+                >
+                  job description is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer pe-0">
+            <button
+              type="button"
+              #myModalClose
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="resetModal()"
+            >
+              Cancel
+            </button>
+            <button *ngIf="!btnManage" type="submit" class="btn btn-primary">
+              Create
+            </button>
+            <button
+              *ngIf="btnManage"
+              type="button"
+              (click)="updateData()"
+              class="btn btn-primary"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

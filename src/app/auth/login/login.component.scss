@@ -1,0 +1,6 @@
+.form-spacing {
+  padding-top: 150px;
+  @media (max-width: 575px) {
+    padding: 150px 30px 30px 30px;
+  }
+}

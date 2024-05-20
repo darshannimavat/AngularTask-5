@@ -1,0 +1,176 @@
+.company-layout {
+  .header {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    &-name {
+      display: flex;
+      span {
+        color: #3787eb;
+      }
+    }
+    &-btns {
+      display: flex;
+      margin-left: auto;
+      button {
+        border: none;
+        border-radius: 5px;
+        padding: 7px 10px;
+        font-weight: 500;
+        color: #3787eb;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+      }
+      &:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      }
+      .active {
+        color: white;
+        background-color: #3787eb;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+
+        .profile {
+          border-radius: 50%;
+          padding: 7px 12px;
+          color: #3787eb;
+          background-color: white;
+          box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+            rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+        .dropdown-content {
+          text-align: center;
+          border-radius: 10px;
+          z-index: 1;
+          right: 1px;
+          display: none;
+          padding: 15px;
+          min-width: 250px;
+          position: absolute;
+          background-color: white;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+          .profile-logo {
+            width: 50px;
+            border: 1px solid #ddd;
+            color: #3787eb;
+            font-weight: 500;
+            border-radius: 50%;
+            font-size: 20px;
+            p {
+              margin: 0;
+              padding-top: 7px;
+            }
+          }
+          span {
+            color: gray;
+          }
+          h5 {
+            margin: 0;
+          }
+          .logout-btn {
+            color: black;
+            cursor: pointer;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+          }
+          .logout-btn:hover {
+            color: #3787eb;
+            background-color: white;
+          }
+        }
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    }
+  }
+}
+
+//  Modal Styling
+.modal-content {
+  h1 {
+    color: #3787eb;
+    border-bottom: 2px dashed black;
+  }
+  .form-design {
+    display: grid;
+    .add-logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 9px;
+      .add-logo-btn {
+        padding: 15px;
+        button {
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+          font-weight: 500;
+          box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+            rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        }
+      }
+      .img-area {
+        display: flex;
+        img {
+          background-color: #ddd;
+          border-radius: 10px;
+        }
+        button {
+          position: relative;
+          font-size: 10px;
+          padding: 1px 5px;
+          bottom: 15px;
+          border: none;
+          margin-left: -10px;
+          border-radius: 50%;
+          background-color: white;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+      }
+    }
+    .form-control:focus {
+      box-shadow: none;
+    }
+    input,
+    select {
+      border: none;
+      outline: none;
+      border-radius: 0;
+      background-color: transparent;
+      border-bottom: 1px solid black;
+      color: black;
+    }
+    select,
+    i {
+      cursor: pointer;
+    }
+    option {
+      color: black;
+    }
+    ::placeholder {
+      color: black;
+    }
+    .input-field {
+      padding: 5px;
+    }
+    /* Scrollbar width */
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+    .error {
+      height: 20px;
+      color: red;
+      font-weight: 500;
+      font-size: 13px;
+      overflow: hidden;
+    }
+  }
+}

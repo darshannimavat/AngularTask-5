@@ -1,0 +1,150 @@
+<div class="form-spacing">
+  <div class="form-design">
+    <div>
+      <form [formGroup]="registrationForm" (ngSubmit)="submitData()">
+        <div class="form-heading">
+          <h1>Registration</h1>
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            placeholder="First Name"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="
+                registrationForm.controls['firstName'].invalid &&
+                registrationForm.controls['firstName'].touched
+              "
+            >
+              First name is required
+            </div>
+          </div>
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            placeholder="Last Name"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="
+                registrationForm.controls['lastName'].invalid &&
+                registrationForm.controls['lastName'].touched
+              "
+            >
+              Last name is required
+            </div>
+          </div>
+        </div>
+        <div class="input-field">
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="registrationForm.controls['email'].errors?.['pattern']"
+            >
+              Please enter a valid email
+            </div>
+            <div
+              class="ps-2"
+              *ngIf="
+                registrationForm.controls['email'].invalid &&
+                registrationForm.controls['email'].touched
+              "
+            >
+              Email is required
+            </div>
+          </div>
+        </div>
+        <div class="input-field">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="registrationForm.controls?.['password']?.errors?.['minlength']"
+            >
+              Password must have 8 characters
+            </div>
+            <div
+              class="ps-2"
+              *ngIf="
+                registrationForm.controls['password'].invalid &&
+                registrationForm.controls['password'].touched
+              "
+            >
+              Password is required
+            </div>
+          </div>
+        </div>
+        <div class="input-field">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="
+                registrationForm.controls['confirmPassword'].invalid &&
+                registrationForm.controls['confirmPassword'].touched
+              "
+            >
+              Confirm Password is required
+            </div>
+            <div
+              class="ps-2"
+              *ngIf="registrationForm.controls['confirmPassword'].value && registrationForm.errors?.['passwordMismatchError']"
+            >
+              Password doesn't match
+            </div>
+          </div>
+        </div>
+        <div class="input-field">
+          <select class="form-control" formControlName="role">
+            <option value="" hidden>Select Role</option>
+            <option value="Admin" *ngIf="!isAdmin">Admin</option>
+            <option value="Company">Company</option>
+            <option value="User">User</option>
+          </select>
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="
+                registrationForm.controls['role'].invalid &&
+                registrationForm.controls['role'].touched
+              "
+            >
+              Please select role
+            </div>
+          </div>
+        </div>
+        <div class="submit-btn">
+          <button type="submit" class="btn">Register</button>
+        </div>
+        <p class="text-dark ps-3">
+          Already have an account?
+          <a class="text-primary" routerLink="/login">Login Now</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

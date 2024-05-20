@@ -1,0 +1,75 @@
+.form-spacing {
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 575px) {
+    padding: 60px 10px 10px 10px;
+  }
+
+  .form-design {
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid darkgray;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    @media (max-width: 575px) {
+      width: 100%;
+    }
+
+    form {
+      .form-heading {
+        display: flex;
+        justify-content: center;
+        h1 {
+          color: #3787eb;
+          font-weight: 700;
+          border-bottom: 2px dashed black;
+          padding: 5px;
+        }
+      }
+      .form-control:focus {
+        box-shadow: none;
+      }
+      input,
+      select {
+        border: none;
+        outline: none;
+        border-radius: 0;
+        background-color: transparent;
+        border-bottom: 1px solid black;
+        color: black;
+      }
+      select {
+        cursor: pointer;
+      }
+      option {
+        color: black;
+      }
+      ::placeholder {
+        color: black;
+      }
+      .input-field {
+        padding: 5px;
+      }
+      .error {
+        height: 20px;
+        color: red;
+        font-weight: 600;
+        overflow: hidden;
+      }
+      .submit-btn {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        button {
+          width: 100%;
+          color: black;
+          font-weight: 600;
+          background-color: lightskyblue;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,371 @@
+.user-page-layout {
+  .header {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    .header-name {
+      display: flex;
+      span {
+        color: #3787eb;
+      }
+    }
+    .search-part {
+      display: flex;
+      width: 380px;
+      align-items: center;
+      border: 2px solid #eeeeee;
+      border-radius: 8px;
+      padding: 6px 10px;
+      background-color: #f7f7f7;
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        background-color: #f7f7f7;
+      }
+    }
+    .header-btns {
+      display: flex;
+      align-items: center;
+
+      button {
+        border: none;
+        border-radius: 5px;
+        padding: 7px 10px;
+        font-weight: 500;
+        color: #3787eb;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+          rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+      }
+      button:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+
+        .profile {
+          border-radius: 50%;
+          padding: 7px 12px;
+          color: #3787eb;
+          background-color: white;
+          box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+            rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        }
+        .dropdown-content {
+          text-align: center;
+          border-radius: 10px;
+          z-index: 1;
+          right: 1px;
+          display: none;
+          padding: 15px;
+          min-width: 250px;
+          position: absolute;
+          background-color: white;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+          .profile-logo {
+            width: 50px;
+            border: 1px solid #ddd;
+            color: #3787eb;
+            font-weight: 500;
+            border-radius: 50%;
+            font-size: 20px;
+            p {
+              margin: 0;
+              padding-top: 7px;
+            }
+          }
+          span {
+            color: gray;
+          }
+          h5 {
+            margin: 0;
+          }
+          .logout-btn {
+            color: black;
+            cursor: pointer;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+          }
+          .logout-btn:hover {
+            color: #3787eb;
+            background-color: white;
+          }
+        }
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    }
+  }
+  .user-content {
+    padding: 20px 0 0 20px;
+    .no-data-found {
+      height: 88vh;
+      width: 100%;
+    }
+    .all-data {
+      width: 100%;
+      display: flex;
+      .part-one {
+        width: 17%;
+        .all-filters {
+          height: 78vh;
+          overflow: auto;
+          padding: 10px 0 0 20px;
+          border-radius: 10px;
+          background-color: white;
+          border: 2px solid #eeeeee;
+          span {
+            color: #777777;
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+      .part-two {
+        width: 83%;
+        .display-jobs {
+          padding-left: 20px;
+          .show-job-count {
+            padding-bottom: 15px;
+            p {
+              margin: 0;
+              font-weight: 500;
+            }
+            span {
+              color: blue;
+              padding: 0 10px;
+              font-weight: 700;
+            }
+          }
+
+          .all-job-part {
+            height: 82vh;
+            overflow: auto;
+            padding-right: 10px;
+            .display-job-design {
+              padding: 21px;
+              background-color: white;
+              border-radius: 10px;
+              transition: all 0.3s;
+              box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+                rgba(0, 0, 0, 0.24) 0px 1px 2px;
+              .img-name {
+                display: flex;
+                align-items: center;
+                .job-img {
+                  display: flex;
+                  border-radius: 10px;
+                  overflow: hidden;
+                  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                  img {
+                    background-color: #f3f6f4;
+                  }
+                }
+                .job-company-name {
+                  padding-left: 20px;
+                  span {
+                    color: #aaaaaa;
+                  }
+                }
+              }
+              .tag-design {
+                display: flex;
+                flex-wrap: wrap;
+                padding-top: 20px;
+                span {
+                  background-color: #eef5ff;
+                  border-radius: 7px;
+                  padding: 7px 15px;
+                  font-size: 13px;
+                  font-weight: 500;
+                  color: #2d81fe;
+                }
+              }
+              .job-description {
+                padding-top: 15px;
+                font-size: 13px;
+                font-weight: 500;
+                color: #8e8e8e;
+              }
+              .date-and-apply {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                .applicant-count {
+                  display: flex;
+                  align-items: center;
+                  font-weight: 500;
+                  span {
+                    color: black;
+                  }
+                  p {
+                    padding-left: 4px;
+                    margin: 0;
+                  }
+                }
+                span {
+                  font-size: 14px;
+                  color: #8e8e8e;
+                  font-weight: 500;
+                }
+                .bookmark {
+                  i {
+                    color: #3787eb;
+                    font-size: 20px;
+                    cursor: pointer;
+                  }
+                  i:hover {
+                    color: #0073ff;
+                  }
+                }
+              }
+              .action-btn {
+                button {
+                  width: 90%;
+                  padding: 5px 0;
+                  font-weight: 500;
+                  border-radius: 7px;
+                  background-color: white;
+                  border: 2px solid #eeeeee;
+                }
+                .apply-btn {
+                  display: flex;
+                  justify-content: center;
+                  padding-top: 10px;
+                  button {
+                    color: #3787eb;
+                  }
+                  button:hover {
+                    color: white;
+                    background-color: #3787eb;
+                  }
+                }
+                .cancel-btn {
+                  display: flex;
+                  justify-content: center;
+                  padding-top: 10px;
+                  button {
+                    color: red;
+                  }
+                  button:hover {
+                    color: white;
+                    background-color: red;
+                  }
+                }
+              }
+            }
+            .display-job-design:hover {
+              transition: all 0.3s;
+              box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.checkbox-wrapper-4 * {
+  box-sizing: border-box;
+}
+.checkbox-wrapper-4 .cbx {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+.checkbox-wrapper-4 .cbx:hover {
+  background: rgba(0, 119, 255, 0.06);
+}
+.checkbox-wrapper-4 .cbx span {
+  float: left;
+  vertical-align: middle;
+  transform: translate3d(0, 0, 0);
+}
+.checkbox-wrapper-4 .cbx span:first-child {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  transform: scale(1);
+  border: 1px solid #cccfdb;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 1px rgba(0, 16, 75, 0.05);
+}
+.checkbox-wrapper-4 .cbx span:first-child svg {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+  transform: translate3d(0, 0, 0);
+}
+.checkbox-wrapper-4 .cbx span:last-child {
+  padding-left: 15px;
+  line-height: 18px;
+}
+.checkbox-wrapper-4 .cbx:hover span:first-child {
+  border-color: #07f;
+}
+.checkbox-wrapper-4 .inp-cbx {
+  position: absolute;
+  visibility: hidden;
+}
+.checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child {
+  background: #07f;
+  border-color: #07f;
+  animation: wave-4 0.4s ease;
+}
+.checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child svg {
+  stroke-dashoffset: 0;
+}
+.checkbox-wrapper-4 .inline-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media screen and (max-width: 991px) {
+  .user-page-layout {
+    .user-content {
+      .all-data {
+        .part-one {
+          width: 100%;
+        }
+        .part-two {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 640px) {
+  .checkbox-wrapper-4 .cbx {
+    width: 100%;
+    display: inline-block;
+  }
+}

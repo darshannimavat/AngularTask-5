@@ -1,0 +1,57 @@
+<div class="company-layout">
+  <div class="header">
+    <div class="header-name">
+      <h2 class="m-0">CHECK<span>WORK</span></h2>
+    </div>
+    <div class="header-btns">
+      <button
+      (click)="activeBtn = true"
+      [ngClass]="activeBtn ? 'active' : '' "
+      routerLink="./all-jobs">
+        All Jobs
+      </button>
+      <div class="ps-2">
+        <button
+        #pendingJobs
+        (click)="activeBtn = false"
+        [ngClass]="!activeBtn ? 'active' : '' "
+        routerLink="./pending-jobs">
+          Pending Jobs
+        </button>
+      </div>
+      <div class="px-2">
+        <div class="dropdown">
+          <button class="profile">
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <div class="dropdown-content" *ngIf="companyData">
+            <div class="d-flex justify-content-between border-bottom pb-2">
+              <div class="profile-logo">
+                <p>
+                  {{
+                    companyData.firstName?.charAt(0) +
+                      "" +
+                      companyData.lastName?.charAt(0)
+                  }}
+                </p>
+              </div>
+              <div>
+                <h5>
+                  {{ companyData.firstName + " " + companyData.lastName }}
+                </h5>
+                <span>{{ companyData.email }}</span>
+              </div>
+            </div>
+            <div class="text-end pt-2 pe-2">
+              <span class="logout-btn" (click)="logout()">Logout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

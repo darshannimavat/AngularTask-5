@@ -1,0 +1,11 @@
+.dashboard-part {
+  padding: 20px 0 0 20px;
+  width: 100%;
+  display: flex;
+  .sidebar {
+    width: 17%;
+  }
+  .job-part {
+    width: 83%;
+  }
+}

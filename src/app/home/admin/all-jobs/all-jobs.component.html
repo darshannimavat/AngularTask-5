@@ -1,0 +1,77 @@
+<div class="pending-job-part">
+  <div *ngIf="!allJobData.length" class="no-data-found">
+    <img
+      src="../../../assets/not data found.png"
+      class="h-100 w-100 object-fit-contain"
+    />
+  </div>
+  <div class="row" *ngIf="allJobData.length">
+    <div
+      class="col-xl-3 col-md-4 col-sm-6 col-12 pb-4"
+      *ngFor="let data of allJobData"
+    >
+      <div class="display-job-design">
+        <div class="img-name">
+          <div class="job-img">
+            <img
+              *ngIf="data.logoUrl"
+              [src]="data.logoUrl"
+              class="object-fit-contain"
+              width="80px"
+              height="80px"
+            />
+            <img
+              *ngIf="!data.logoUrl"
+              src="../../../assets/No image vector.png"
+              class="object-fit-contain"
+              width="80px"
+              height="80px"
+            />
+          </div>
+          <div class="job-company-name">
+            <div class="">
+              <h5>{{ data.jobName }}</h5>
+            </div>
+            <span>{{ data.companyName }}</span>
+          </div>
+        </div>
+        <div class="tag-design">
+          <div class="">
+            <span>{{ data.jobType }}</span>
+          </div>
+          <div class="px-2">
+            <span>{{ data.jobStyle }}</span>
+          </div>
+          <div class="">
+            <span>{{ data.experienceLevel }}</span>
+          </div>
+        </div>
+        <div class="job-description">
+          <p>{{ data.jobDescription }}</p>
+        </div>
+        <div class="date-and-apply">
+          <div class="d-flex">
+            <span *ngIf="(data.date | totalDays) === 0">Today</span>
+            <span *ngIf="(data.date | totalDays) === 1"
+              >{{ data.date | totalDays }} Day ago</span
+            >
+            <span *ngIf="(data.date | totalDays) > 1"
+              >{{ data.date | totalDays }} Days ago</span
+            >
+          </div>
+          <div class="bookmark">
+            <div
+              [ngClass]="{
+                pending: data.status === 'Pending',
+                approve: data.status === 'Approve',
+                reject: data.status === 'Reject'
+              }"
+            >
+              {{ data.status }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="company-layout">
+  <div class="header">
+    <div class="header-name">
+      <h2 class="m-0">GO<span>WORK</span></h2>
+    </div>
+    <div class="search-part">
+      <div class="pe-2"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <input
+        type="search"
+        (input)="searchJobs($event)"
+        placeholder="Search for job"
+      />
+    </div>
+    <div class="header-btns" *ngIf="loggedInUser">
+      <div *ngIf="loggedInUser.role === 'Admin'">
+        <button
+          (click)="activeBtn = true"
+          [ngClass]="activeBtn ? 'active' : ''"
+          routerLink="./all-jobs"
+        >
+          All Jobs
+        </button>
+      </div>
+      <div class="ps-2" *ngIf="loggedInUser.role === 'Admin'">
+        <button
+          #pendingJobs
+          (click)="activeBtn = false"
+          [ngClass]="!activeBtn ? 'active' : ''"
+          routerLink="./pending-jobs"
+        >
+          Pending Jobs
+        </button>
+      </div>
+      <div *ngIf="loggedInUser.role === 'Company' ">
+        <button
+          (click)="btnManage = false"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Create job
+        </button>
+      </div>
+      <div class="px-2">
+        <div class="dropdown">
+          <button class="profile">
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <div class="dropdown-content" *ngIf="loggedInUser">
+            <div class="d-flex justify-content-between border-bottom pb-2">
+              <div class="profile-logo">
+                <p>
+                  {{
+                    loggedInUser.firstName?.charAt(0) +
+                      "" +
+                      loggedInUser.lastName?.charAt(0)
+                  }}
+                </p>
+              </div>
+              <div>
+                <h5>
+                  {{ loggedInUser.firstName + " " + loggedInUser.lastName }}
+                </h5>
+                <span>{{ loggedInUser.email }}</span>
+              </div>
+            </div>
+            <div class="text-end pt-2 pe-2">
+              <span class="logout-btn" (click)="logout()">Logout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

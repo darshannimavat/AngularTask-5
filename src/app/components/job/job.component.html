@@ -1,0 +1,122 @@
+<div class="part-two">
+  <div class="display-jobs" *ngIf="approveJobData.length">
+    <div class="show-job-count">
+      <div class="d-flex pt-2">
+        <p>Showing</p>
+        <span *ngIf="approveJobData.length">{{ approveJobData.length }}</span>
+        <p>Jobs</p>
+      </div>
+    </div>
+    <div class="all-job-part">
+      <div class="row me-0">
+        <div
+          class="col-xl-4 col-md-6 col-12 pb-4"
+          *ngFor="let data of approveJobData"
+        >
+          <div class="display-job-design">
+            <div class="img-name">
+              <div class="job-img">
+                <img
+                  *ngIf="data.logoUrl"
+                  [src]="data.logoUrl"
+                  class="object-fit-contain"
+                  width="80px"
+                  height="80px"
+                />
+                <img
+                  *ngIf="!data.logoUrl"
+                  src="../../../assets/No image vector.png"
+                  class="object-fit-contain"
+                  width="80px"
+                  height="80px"
+                />
+              </div>
+              <div class="job-company-name">
+                <div>
+                  <h5>{{ data.jobName }}</h5>
+                </div>
+                <span>{{ data.companyName }}</span>
+              </div>
+            </div>
+            <div class="tag-design">
+              <div class="">
+                <span>{{ data.jobType }}</span>
+              </div>
+              <div class="px-2">
+                <span>{{ data.jobStyle }}</span>
+              </div>
+              <div class="">
+                <span>{{ data.experienceLevel }}</span>
+              </div>
+            </div>
+            <div class="job-description">
+              <p>{{ data.jobDescription }}</p>
+            </div>
+            <div class="date-and-apply">
+              <div class="d-flex align-items-center">
+                <span *ngIf="(data.date | totalDays) === 0">Today</span>
+                <span *ngIf="(data.date | totalDays) === 1"
+                  >{{ data.date | totalDays }} Day ago</span
+                >
+                <span *ngIf="(data.date | totalDays) > 1"
+                  >{{ data.date | totalDays }} Days ago</span
+                >
+                <span class="px-2">•</span>
+                <div class="applicant-count">
+                  <span>{{ data.applied?.length }}</span>
+                  <p>Applicant</p>
+                </div>
+              </div>
+              <div class="bookmark">
+                <div
+                  [ngClass]="{
+                    pending: data.status === 'Pending',
+                    approve: data.status === 'Approve',
+                    reject: data.status === 'Reject'
+                  }"
+                >
+                  {{ data.status }}
+                </div>
+                <button class="btn reject-job-btn" (click)="rejectJob(data.id)">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+                <button
+                  class="btn accept-job-btn"
+                  (click)="approveJob(data.id)"
+                >
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <i
+                  class="fa-regular fa-bookmark"
+                  *ngIf="!data.bookmark?.includes(loggedInUser)"
+                  (click)="addToBookmark(data.id)"
+                ></i>
+                <i
+                  class="fa-solid fa-bookmark"
+                  *ngIf="data.bookmark?.includes(loggedInUser)"
+                  (click)="removeBookmark(data.id)"
+                ></i>
+              </div>
+            </div>
+            <div class="action-btn">
+              <div
+                class="apply-btn"
+                *ngIf="!data.applied?.includes(loggedInUser)"
+                (click)="applyForJob(data.id)"
+              >
+                <button>Apply</button>
+              </div>
+              <div
+                class="cancel-btn"
+                *ngIf="data.applied?.includes(loggedInUser)"
+                (click)="cancelJob(data.id)"
+              >
+                <button>Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

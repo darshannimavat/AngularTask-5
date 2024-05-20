@@ -1,0 +1,780 @@
+<div class="user-page-layout">
+  <div class="header">
+    <div class="header-name">
+      <h3 class="m-0">GO<span>WORK</span></h3>
+    </div>
+    <div class="search-part">
+      <div class="pe-2"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <input
+        type="search"
+        (input)="searchJobs($event)"
+        placeholder="Search for job"
+      />
+    </div>
+    <div class="header-btns">
+      <div class="px-3">
+        <div class="dropdown">
+          <button class="profile">
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <div class="dropdown-content" *ngIf="userInfo">
+            <div class="d-flex justify-content-between border-bottom pb-2">
+              <div class="profile-logo">
+                <p>
+                  {{
+                    userInfo.firstName?.charAt(0) +
+                      "" +
+                      userInfo.lastName?.charAt(0)
+                  }}
+                </p>
+              </div>
+              <div>
+                <h5>
+                  {{ userInfo.firstName + " " + userInfo.lastName }}
+                </h5>
+                <span>{{ userInfo.email }}</span>
+              </div>
+            </div>
+            <div class="text-end pt-2 pe-2">
+              <span class="logout-btn" (click)="logout()">Logout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-content">
+    <!-- Offcanvas Button -->
+    <div class="ps-4">
+      <button
+        class="btn btn-primary d-block d-lg-none"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="all-data">
+      <div class="part-one d-none d-lg-block">
+        <div class="all-filters">
+          <div class="pe-4 py-1">
+            <h5>Applied Jobs</h5>
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="appliedjobs"
+                (change)="filterAllData($event, 'applied', 'applied')"
+                type="checkbox"
+              />
+              <label class="cbx" for="appliedjobs"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Applied Jobs</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+          </div>
+
+          <div class="pe-4 py-1">
+            <h5>Bookmark</h5>
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="bookmark"
+                (change)="filterAllData($event, 'bookmark', 'bookmark')"
+                type="checkbox"
+              />
+              <label class="cbx" for="bookmark"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Bookmark</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+          </div>
+
+          <div class="pe-4 py-1">
+            <h5>Experience Level</h5>
+            <div class="">
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="internship"
+                  (change)="
+                    filterAllData($event, 'Internship', 'experienceLevel')
+                  "
+                  type="checkbox"
+                />
+                <label class="cbx" for="internship"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Internship</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="entrylevel"
+                  (change)="
+                    filterAllData($event, 'Entry Level', 'experienceLevel')
+                  "
+                  type="checkbox"
+                />
+                <label class="cbx" for="entrylevel"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Entry Level</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="associate"
+                  (change)="
+                    filterAllData($event, 'Associate', 'experienceLevel')
+                  "
+                  type="checkbox"
+                />
+                <label class="cbx" for="associate"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Associate</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="midsenior"
+                  (change)="
+                    filterAllData($event, 'Mid-Senior Level', 'experienceLevel')
+                  "
+                  type="checkbox"
+                />
+                <label class="cbx" for="midsenior"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Mid-Senior Level</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="director"
+                  (change)="
+                    filterAllData($event, 'Director', 'experienceLevel')
+                  "
+                  type="checkbox"
+                />
+                <label class="cbx" for="director"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Director</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="pe-4 py-1">
+            <h5>Job Type</h5>
+            <div class="">
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="fulltime"
+                  (change)="filterAllData($event, 'Full-time', 'jobType')"
+                  type="checkbox"
+                />
+                <label class="cbx" for="fulltime"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Full-time</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="parttime"
+                  (change)="filterAllData($event, 'Part-time', 'jobType')"
+                  type="checkbox"
+                />
+                <label class="cbx" for="parttime"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Part-time</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="internship2"
+                  (change)="filterAllData($event, 'Internship', 'jobType')"
+                  type="checkbox"
+                />
+                <label class="cbx" for="internship2"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Internship</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="contract"
+                  (change)="filterAllData($event, 'Contract', 'jobType')"
+                  type="checkbox"
+                />
+                <label class="cbx" for="contract"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Contract</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="pe-4 py-1">
+            <h5>Work Style</h5>
+            <div class="">
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="remote"
+                  (change)="filterAllData($event, 'Remote', 'jobStyle')"
+                  type="checkbox"
+                />
+                <label class="cbx" for="remote"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Remote</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="onsite"
+                  (change)="filterAllData($event, 'Onsite', 'jobStyle')"
+                  type="checkbox"
+                />
+                <label class="cbx" for="onsite"
+                  ><span>
+                    <svg width="12px" height="10px">
+                      <use xlink:href="#check-4"></use></svg></span
+                  ><span>Onsite</span></label
+                >
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-two">
+        <div *ngIf="!approveJobData.length" class="no-data-found">
+          <img
+            src="../../../assets/not data found.png"
+            class="h-100 w-100 object-fit-contain"
+          />
+        </div>
+        <div class="display-jobs" *ngIf="approveJobData.length">
+          <div class="show-job-count">
+            <div class="d-flex pt-2">
+              <p>Showing</p>
+              <span *ngIf="approveJobData.length">{{
+                approveJobData.length
+              }}</span>
+              <p>Jobs</p>
+            </div>
+          </div>
+          <div class="all-job-part">
+            <div class="row me-0">
+              <div
+                class="col-xl-4 col-md-6 col-12 pb-4"
+                *ngFor="let data of approveJobData"
+              >
+                <div class="display-job-design">
+                  <div class="img-name">
+                    <div class="job-img">
+                      <img
+                        *ngIf="data.logoUrl"
+                        [src]="data.logoUrl"
+                        class="object-fit-contain"
+                        width="80px"
+                        height="80px"
+                      />
+                      <img
+                        *ngIf="!data.logoUrl"
+                        src="../../../assets/No image vector.png"
+                        class="object-fit-contain"
+                        width="80px"
+                        height="80px"
+                      />
+                    </div>
+                    <div class="job-company-name">
+                      <div>
+                        <h5>{{ data.jobName }}</h5>
+                      </div>
+                      <span>{{ data.companyName }}</span>
+                    </div>
+                  </div>
+                  <div class="tag-design">
+                    <div class="">
+                      <span>{{ data.jobType }}</span>
+                    </div>
+                    <div class="px-2">
+                      <span>{{ data.jobStyle }}</span>
+                    </div>
+                    <div class="">
+                      <span>{{ data.experienceLevel }}</span>
+                    </div>
+                  </div>
+                  <div class="job-description">
+                    <p>{{ data.jobDescription }}</p>
+                  </div>
+                  <div class="date-and-apply">
+                    <div class="d-flex align-items-center">
+                      <span *ngIf="(data.date | totalDays) === 0">Today</span>
+                      <span *ngIf="(data.date | totalDays) === 1"
+                        >{{ data.date | totalDays }} Day ago</span
+                      >
+                      <span *ngIf="(data.date | totalDays) > 1"
+                        >{{ data.date | totalDays }} Days ago</span
+                      >
+                      <span class="px-2">•</span>
+                      <div class="applicant-count">
+                        <span>{{ data.applied?.length }}</span>
+                        <p>Applicant</p>
+                      </div>
+                    </div>
+                    <div class="bookmark">
+                      <i
+                        class="fa-regular fa-bookmark"
+                        *ngIf="!data.bookmark?.includes(loggedInUser)"
+                        (click)="addToBookmark(data.id)"
+                      ></i>
+                      <i
+                        class="fa-solid fa-bookmark"
+                        *ngIf="data.bookmark?.includes(loggedInUser)"
+                        (click)="removeBookmark(data.id)"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="action-btn">
+                    <div
+                      class="apply-btn"
+                      *ngIf="!data.applied?.includes(loggedInUser)"
+                      (click)="applyForJob(data.id)"
+                    >
+                      <button>Apply</button>
+                    </div>
+                    <div
+                      class="cancel-btn"
+                      *ngIf="data.applied?.includes(loggedInUser)"
+                      (click)="cancelJob(data.id)"
+                    >
+                      <button>Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Offcanvas -->
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filters</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="part-one">
+      <div class="all-filters">
+        <div class="pe-4 py-1">
+          <h5>Applied Jobs</h5>
+          <div class="checkbox-wrapper-4">
+            <input
+              class="inp-cbx"
+              id="appliedjobs"
+              (change)="filterAllData($event, 'applied', 'applied')"
+              type="checkbox"
+            />
+            <label class="cbx" for="appliedjobs"
+              ><span>
+                <svg width="12px" height="10px">
+                  <use xlink:href="#check-4"></use></svg></span
+              ><span>Applied Jobs</span></label
+            >
+            <svg class="inline-svg">
+              <symbol id="check-4" viewbox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </symbol>
+            </svg>
+          </div>
+        </div>
+
+        <div class="pe-4 py-1">
+          <h5>Bookmark</h5>
+          <div class="checkbox-wrapper-4">
+            <input
+              class="inp-cbx"
+              id="bookmark"
+              (change)="filterAllData($event, 'bookmark', 'bookmark')"
+              type="checkbox"
+            />
+            <label class="cbx" for="bookmark"
+              ><span>
+                <svg width="12px" height="10px">
+                  <use xlink:href="#check-4"></use></svg></span
+              ><span>Bookmark</span></label
+            >
+            <svg class="inline-svg">
+              <symbol id="check-4" viewbox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </symbol>
+            </svg>
+          </div>
+        </div>
+
+        <div class="pe-4 py-1">
+          <h5>Experience Level</h5>
+          <div class="">
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="internship"
+                (change)="
+                  filterAllData($event, 'Internship', 'experienceLevel')
+                "
+                type="checkbox"
+              />
+              <label class="cbx" for="internship"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Internship</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="entrylevel"
+                (change)="
+                  filterAllData($event, 'Entry Level', 'experienceLevel')
+                "
+                type="checkbox"
+              />
+              <label class="cbx" for="entrylevel"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Entry Level</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="associate"
+                (change)="filterAllData($event, 'Associate', 'experienceLevel')"
+                type="checkbox"
+              />
+              <label class="cbx" for="associate"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Associate</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="midsenior"
+                (change)="
+                  filterAllData($event, 'Mid-Senior Level', 'experienceLevel')
+                "
+                type="checkbox"
+              />
+              <label class="cbx" for="midsenior"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Mid-Senior Level</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="director"
+                (change)="filterAllData($event, 'Director', 'experienceLevel')"
+                type="checkbox"
+              />
+              <label class="cbx" for="director"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Director</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="pe-4 py-1">
+          <h5>Job Type</h5>
+          <div class="">
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="fulltime"
+                (change)="filterAllData($event, 'Full-time', 'jobType')"
+                type="checkbox"
+              />
+              <label class="cbx" for="fulltime"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Full-time</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="parttime"
+                (change)="filterAllData($event, 'Part-time', 'jobType')"
+                type="checkbox"
+              />
+              <label class="cbx" for="parttime"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Part-time</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="internship2"
+                (change)="filterAllData($event, 'Internship', 'jobType')"
+                type="checkbox"
+              />
+              <label class="cbx" for="internship2"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Internship</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="contract"
+                (change)="filterAllData($event, 'Contract', 'jobType')"
+                type="checkbox"
+              />
+              <label class="cbx" for="contract"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Contract</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="pe-4 py-1">
+          <h5>Work Style</h5>
+          <div class="">
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="remote"
+                (change)="filterAllData($event, 'Remote', 'jobStyle')"
+                type="checkbox"
+              />
+              <label class="cbx" for="remote"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Remote</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="onsite"
+                (change)="filterAllData($event, 'Onsite', 'jobStyle')"
+                type="checkbox"
+              />
+              <label class="cbx" for="onsite"
+                ><span>
+                  <svg width="12px" height="10px">
+                    <use xlink:href="#check-4"></use></svg></span
+                ><span>Onsite</span></label
+              >
+              <svg class="inline-svg">
+                <symbol id="check-4" viewbox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

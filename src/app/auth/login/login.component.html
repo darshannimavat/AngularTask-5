@@ -1,0 +1,72 @@
+<div class="form-spacing">
+  <div class="form-design">
+    <div>
+      <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+        <div class="form-heading">
+          <h1>Sign in</h1>
+        </div>
+
+        <div class="input-field">
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="loginForm.controls['email'].errors?.['pattern']"
+            >
+              Please enter a valid email
+            </div>
+            <div
+              class="ps-2"
+              *ngIf="
+                loginForm.controls['email'].invalid &&
+                loginForm.controls['email'].touched
+              "
+            >
+              Email is required
+            </div>
+          </div>
+        </div>
+
+        <div class="input-field">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div class="error">
+            <div
+              class="ps-2"
+              *ngIf="loginForm.controls?.['password']?.errors?.['minlength']"
+            >
+              Password must have 8 characters
+            </div>
+            <div
+              class="ps-2"
+              *ngIf="
+                loginForm.controls['password'].invalid &&
+                loginForm.controls['password'].touched
+              "
+            >
+              Password is required
+            </div>
+          </div>
+        </div>
+
+        <div class="submit-btn">
+          <button type="submit" class="btn">Sign in</button>
+        </div>
+
+        <p class="text-dark ps-3">
+          Don't have an account?
+          <a class="text-primary" routerLink="/registration">Register Now</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+.pending-job-part {
+  height: 90vh;
+  padding: 20px 20px 0 20px;
+  overflow: auto;
+  .no-data-found {
+    height: 87vh;
+    width: 100%;
+  }
+  .display-job-design {
+    padding: 21px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    .img-name {
+      display: flex;
+      align-items: center;
+
+      .job-img {
+        display: flex;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+          rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        img {
+          background-color: #f3f6f4;
+        }
+      }
+      .job-company-name {
+        padding-left: 20px;
+        span {
+          color: #aaaaaa;
+        }
+      }
+    }
+    .tag-design {
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 20px;
+      span {
+        background-color: #eef5ff;
+        border-radius: 7px;
+        padding: 7px 15px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #2d81fe;
+      }
+    }
+    .job-description {
+      padding-top: 15px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #8e8e8e;
+    }
+    .date-and-apply {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 14px;
+        color: #8e8e8e;
+        font-weight: 500;
+      }
+      .pending {
+        padding: 5px;
+        color: white;
+        font-weight: 500;
+        border-radius: 5px;
+        background-color: rgb(165 197 255);
+      }
+      .approve {
+        padding: 5px;
+        color: white;
+        font-weight: 500;
+        border-radius: 5px;
+        background-color: rgb(165 255 165);
+      }
+      .reject {
+        color: white;
+        font-weight: 500;
+        padding: 5px 14px;
+        border-radius: 5px;
+        background-color: rgb(255 173 173);
+      }
+      .bookmark {
+        display: flex;
+        gap: 10px;
+        .reject-job-btn {
+          border: 1px solid #ddd;
+          color: red;
+        }
+        .accept-job-btn {
+          border: 1px solid #ddd;
+          color: #3787eb;
+        }
+        .reject-job-btn:hover,
+        .accept-job-btn:hover {
+          box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+      }
+    }
+  }
+  .display-job-design:hover {
+    transition: all 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  }
+}

@@ -1,0 +1,15 @@
+<app-admin-home *ngIf="isRole === 'Admin'"></app-admin-home>
+<app-company-home *ngIf="isRole === 'Company'"></app-company-home>
+<app-user-home *ngIf="isRole === 'User'"></app-user-home>
+
+<!-- <div class="">
+  <div><app-navbar></app-navbar></div>
+  <div class="dashboard-part">
+    <div class="sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="job-part">
+      <app-job></app-job>
+    </div>
+  </div>
+</div> -->
